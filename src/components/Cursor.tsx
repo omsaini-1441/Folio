@@ -60,7 +60,7 @@ export default function Cursor() {
       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
     >
       {label && (
-        <span className="font-mono text-10px uppercase tracking-widest text-ink">{label}</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-ink">{label}</span>
       )}
     </motion.div>
   )
