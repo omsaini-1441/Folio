@@ -23,6 +23,14 @@
   color: transparent;
 }
 
+/* outlined text fills with accent on hover */
+.stroke-fill-hover {
+  transition: color 0.5s ease;
+}
+.stroke-fill-hover:hover {
+  color: var(--color-accent);
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--color-muted) var(--color-ink);

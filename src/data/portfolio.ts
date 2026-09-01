@@ -32,7 +32,7 @@ export const profile = {
  * form submits straight to your inbox. While empty, the form falls
  * back to opening the visitor's email app with the message pre-filled.
  */
-export const contactFormAccessKey = ''
+export const contactFormAccessKey = '8ddbf720-3323-4875-a283-f21b946964ea'
 
 export const stats = [
   { value: 2, suffix: '+', label: 'Years shipping production systems' },
