@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import SectionHeading from './SectionHeading'
+import { Highlight } from '../lib/highlight'
 import { projects } from '../data/portfolio'
 
 type Project = (typeof projects)[number]
@@ -58,7 +59,9 @@ function ProjectCard({ project, flip }: { project: Project; flip: boolean }) {
           <span className="ml-auto font-mono text-xs text-muted">{project.year}</span>
         </div>
 
-        <p className="max-w-lg leading-relaxed text-muted">{project.description}</p>
+        <p className="max-w-lg leading-relaxed text-muted">
+          <Highlight text={project.description} />
+        </p>
 
         <div className="flex flex-wrap gap-2">
           {project.stack.map((tech) => (

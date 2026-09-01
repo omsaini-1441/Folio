@@ -8,20 +8,26 @@ import {
   type MotionValue,
 } from 'motion/react'
 import SectionHeading from './SectionHeading'
+import { tokenizeWords } from '../lib/highlight'
 import { profile, stats } from '../data/portfolio'
 
 function Word({
   word,
+  accent,
   range,
   progress,
 }: {
   word: string
+  accent: boolean
   range: [number, number]
   progress: MotionValue<number>
 }) {
   const opacity = useTransform(progress, range, [0.14, 1])
   return (
-    <motion.span style={{ opacity }} className="mr-[0.3em] inline-block">
+    <motion.span
+      style={{ opacity }}
+      className={`mr-[0.3em] inline-block ${accent ? 'text-accent' : ''}`}
+    >
       {word}
     </motion.span>
   )
@@ -57,7 +63,7 @@ export default function About() {
     offset: ['start 0.85', 'end 0.45'],
   })
 
-  const words = profile.aboutIntro.split(' ')
+  const words = tokenizeWords(profile.aboutIntro)
 
   return (
     <section id="about" className="px-6 py-28 md:px-10 md:py-40">
@@ -70,10 +76,11 @@ export default function About() {
         </div>
 
         <p ref={textRef} className="max-w-3xl text-xl font-medium leading-relaxed text-paper md:text-3xl">
-          {words.map((word, i) => (
+          {words.map(({ word, accent }, i) => (
             <Word
               key={i}
               word={word}
+              accent={accent}
               progress={scrollYProgress}
               range={[i / words.length, (i + 1) / words.length]}
             />

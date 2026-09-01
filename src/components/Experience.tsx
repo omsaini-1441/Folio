@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import SectionHeading from './SectionHeading'
+import { Highlight } from '../lib/highlight'
 import { experience, education } from '../data/portfolio'
 
 export default function Experience() {
@@ -31,7 +32,9 @@ export default function Experience() {
               </p>
             </div>
 
-            <p className="max-w-lg leading-relaxed text-muted">{job.description}</p>
+            <p className="max-w-lg leading-relaxed text-muted">
+              <Highlight text={job.description} />
+            </p>
           </motion.div>
         ))}
       </div>

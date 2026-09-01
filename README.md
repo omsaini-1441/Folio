@@ -68,6 +68,16 @@ All copy lives in **one file**: `src/data/portfolio.ts`
 - `projects` — project cards (title, description, stack, image, accent color)
 - `experience` / `education` — the work history section
 
+### Accent highlights
+
+Wrap any phrase in asterisks to paint it in the accent colour:
+
+```ts
+heroBlurb: 'I ship *production event-driven systems*: message pipelines and more.'
+```
+
+This works in `heroBlurb`, `aboutIntro`, project descriptions and experience descriptions. In the About section the highlight rides along with the scroll-linked word reveal.
+
 ## Images
 
 Project screenshots live in `public/projects/` as WebP (~80 KB each, down from ~1.7 MB PNGs). To re-optimize after adding new artwork:

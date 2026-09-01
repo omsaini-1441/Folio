@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
+import { Highlight } from '../lib/highlight'
 import { profile } from '../data/portfolio'
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -77,7 +78,7 @@ export default function Hero({ ready }: { ready: boolean }) {
             animate={ready ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, ease: EASE, delay: 1 }}
           >
-            {profile.heroBlurb}
+            <Highlight text={profile.heroBlurb} />
           </motion.p>
 
           <motion.div
