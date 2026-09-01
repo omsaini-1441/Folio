@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { profile } from '../data/portfolio'
 
-const DURATION = 1.8
+const DURATION =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 0.3
+    : 1.8
 
 export default function Preloader({ onDone }: { onDone: () => void }) {
   const [count, setCount] = useState(0)

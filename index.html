@@ -3,21 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Om Saini, Full-Stack Developer shipping production event-driven systems: message pipelines, real-time sync engines and multi-tenant Docker infrastructure." />
-    <meta property="og:title" content="Om Saini | Full-Stack Developer" />
-    <meta property="og:description" content="Production event-driven systems, real-time sync and multi-tenant infrastructure, wrapped in interfaces that feel effortless." />
-    <meta property="og:image" content="/projects/orchorb-ui.png" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="theme-color" content="#0b0b0c" />
+
     <title>Om Saini | Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Om Saini is a full-stack developer building production event-driven systems: message pipelines, real-time sync engines and multi-tenant Docker infrastructure, wrapped in interfaces that feel effortless."
+    />
+    <meta name="author" content="Om Saini" />
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Om Saini" />
+    <meta property="og:title" content="Om Saini | Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Production event-driven systems, real-time sync and multi-tenant infrastructure, wrapped in interfaces that feel effortless."
+    />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Om Saini | Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Production event-driven systems, real-time sync and multi-tenant infrastructure, wrapped in interfaces that feel effortless."
+    />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og.jpg" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Om Saini",
+        "url": "%VITE_SITE_URL%/",
+        "image": "%VITE_SITE_URL%/og.jpg",
+        "jobTitle": "Full-Stack Developer",
+        "email": "mailto:omsaini.tech@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Chandigarh", "addressCountry": "IN" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Chitkara University" },
+        "knowsAbout": [
+          "Node.js",
+          "NestJS",
+          "React",
+          "TypeScript",
+          "MongoDB",
+          "PostgreSQL",
+          "RabbitMQ",
+          "Docker",
+          "Redis"
+        ],
+        "sameAs": [
+          "https://github.com/omsaini-1441",
+          "https://linkedin.com/in/om-saini",
+          "https://leetcode.com/u/om_saini"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; color: #f1efe6; font-family: sans-serif">
+        <h1>Om Saini &mdash; Full-Stack Developer</h1>
+        <p>This portfolio needs JavaScript enabled. Reach me at omsaini.tech@gmail.com.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -70,6 +70,9 @@ function ContactForm() {
     const message = String(data.get('message') ?? '')
     const subject = `Portfolio: ${topic} from ${name}`
 
+    // Honeypot: humans never see this field, bots fill everything.
+    if (data.get('botcheck')) return
+
     if (!contactFormAccessKey) {
       // No API key configured: open the visitor's mail app pre-filled.
       console.warn('[contact] No Web3Forms access key configured, falling back to mailto.')
@@ -86,6 +89,8 @@ function ContactForm() {
         body: JSON.stringify({
           access_key: contactFormAccessKey,
           subject,
+          from_name: 'Portfolio contact form',
+          botcheck: false,
           name,
           email,
           message: `Reaching out about: ${topic}\n\n${message}`,
@@ -161,20 +166,36 @@ function ContactForm() {
             viewport={{ once: true, margin: '-10%' }}
             transition={{ duration: 0.8, ease: EASE }}
           >
+            {/* Honeypot: off-screen and skipped by keyboard, bots fill it anyway */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              className="sr-only"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
             Hey Om, I'm{' '}
             <input
               name="name"
               required
+              aria-label="Your name"
               placeholder="your name"
               autoComplete="name"
               className={`${inlineInput} min-w-[9ch]`}
             />{' '}
             and I'm reaching out about{' '}
-            <span className="inline-flex flex-wrap items-baseline gap-2 align-baseline">
+            <span
+              role="radiogroup"
+              aria-label="What are you reaching out about?"
+              className="inline-flex flex-wrap items-baseline gap-2 align-baseline"
+            >
               {TOPICS.map((t) => (
                 <button
                   key={t}
                   type="button"
+                  role="radio"
+                  aria-checked={topic === t}
                   data-hover
                   onClick={() => setTopic(t)}
                   className={`rounded-full border px-4 py-1 align-middle font-body text-sm transition-all duration-300 md:text-base ${
@@ -192,6 +213,7 @@ function ContactForm() {
               name="message"
               required
               rows={1}
+              aria-label="Your message"
               placeholder="two sentences is plenty, I'll ask the rest"
               className={`${inlineInput} w-full resize-none leading-snug`}
             />
@@ -200,6 +222,7 @@ function ContactForm() {
               name="email"
               type="email"
               required
+              aria-label="Your email address"
               placeholder="you@company.com"
               autoComplete="email"
               className={`${inlineInput} min-w-[13ch]`}

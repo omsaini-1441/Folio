@@ -12,7 +12,9 @@ export default function Cursor() {
   const springY = useSpring(y, { stiffness: 500, damping: 40, mass: 0.6 })
 
   useEffect(() => {
-    if (!window.matchMedia('(pointer: fine)').matches) return
+    const finePointer = window.matchMedia('(pointer: fine)').matches
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!finePointer || reducedMotion) return
     setEnabled(true)
 
     const onMove = (e: MouseEvent) => {

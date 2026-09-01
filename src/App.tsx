@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MotionConfig } from 'motion/react'
 import { ReactLenis } from 'lenis/react'
 import WipeProvider from './components/PageWipe'
 import Preloader from './components/Preloader'
@@ -12,27 +13,39 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 export default function App() {
   const [ready, setReady] = useState(false)
 
   return (
-    <ReactLenis root options={{ lerp: 0.08, wheelMultiplier: 1.1 }}>
-      <WipeProvider>
-      <div className="grain overflow-x-clip">
-        <Preloader onDone={() => setReady(true)} />
-        <Cursor />
-        <Navbar ready={ready} />
-        <main>
-          <Hero ready={ready} />
-          <Marquee />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-        </main>
-        <Contact />
-      </div>
-      </WipeProvider>
-    </ReactLenis>
+    <MotionConfig reducedMotion="user">
+      <ReactLenis
+        root
+        options={{
+          lerp: prefersReducedMotion ? 1 : 0.08,
+          wheelMultiplier: 1.1,
+          smoothWheel: !prefersReducedMotion,
+        }}
+      >
+        <WipeProvider>
+          <div className="grain overflow-x-clip">
+            <Preloader onDone={() => setReady(true)} />
+            <Cursor />
+            <Navbar ready={ready} />
+            <main>
+              <Hero ready={ready} />
+              <Marquee />
+              <About />
+              <Skills />
+              <Projects />
+              <Experience />
+            </main>
+            <Contact />
+          </div>
+        </WipeProvider>
+      </ReactLenis>
+    </MotionConfig>
   )
 }

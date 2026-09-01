@@ -95,3 +95,26 @@ body {
 .animate-pulse-dot {
   animation: pulse-dot 1.6s ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::before,
+  .animate-marquee,
+  .animate-pulse-dot {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* the custom cursor is motion-heavy; hand control back to the OS */
+  body,
+  a,
+  button,
+  [data-hover] {
+    cursor: auto;
+  }
+}

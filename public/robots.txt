@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://omsaini.vercel.app/sitemap.xml

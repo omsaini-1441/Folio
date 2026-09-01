@@ -29,7 +29,10 @@ function ProjectCard({ project, flip }: { project: Project; flip: boolean }) {
             src={project.image}
             alt={`${project.title} · ${project.category}`}
             className="h-full w-full object-cover"
+            width={1400}
+            height={1050}
             loading="lazy"
+            decoding="async"
           />
         </motion.div>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />

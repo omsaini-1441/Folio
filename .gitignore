@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Local env overrides (the committed .env holds public, non-secret values)
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

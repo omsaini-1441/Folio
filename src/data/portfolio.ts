@@ -27,12 +27,13 @@ export const profile = {
 }
 
 /**
- * Contact form delivery. Get a free access key at https://web3forms.com
- * (enter your email, they send you the key). Paste it below and the
- * form submits straight to your inbox. While empty, the form falls
- * back to opening the visitor's email app with the message pre-filled.
+ * Contact form delivery, powered by https://web3forms.com
+ * The key lives in .env as VITE_WEB3FORMS_KEY (and in the Vercel dashboard
+ * for production). It is public by design: it only permits sending mail to
+ * the address it was issued for. If it is ever missing, the form degrades
+ * to opening the visitor's mail app with the message pre-filled.
  */
-export const contactFormAccessKey = '8ddbf720-3323-4875-a283-f21b946964ea'
+export const contactFormAccessKey = import.meta.env.VITE_WEB3FORMS_KEY ?? ''
 
 export const stats = [
   { value: 2, suffix: '+', label: 'Years shipping production systems' },
@@ -96,7 +97,7 @@ export const projects = [
     description:
       'A self-hosted control plane that makes Docker microservices feel like a managed cloud. Deploy from an image or a Git repo, route live traffic per organization, promote or roll back versions, scale replicas and watch logs stream in real time. Traefik handles the dynamic routing, NestJS and dockerode keep the runtime honest, and small teams get a deploy experience that feels expensive without the Kubernetes tax.',
     stack: ['NestJS', 'React', 'Traefik', 'PostgreSQL', 'Redis', 'RabbitMQ', 'dockerode'],
-    image: '/projects/orchorb-ui.png',
+    image: '/projects/orchorb-ui.webp',
     accent: '#7c8cff',
   },
   {
@@ -107,7 +108,7 @@ export const projects = [
     description:
       'The backend brain of a construction operations platform covering procurement, inventory, resource planning and multi-level billing. Hundreds of APIs power a dozen deeply relational modules with role-based access for the entire org chart. An offline-first sync layer keeps field teams working straight through dead zones, and message queues with retry and dead-letter safety nets make sure a notification never quietly disappears.',
     stack: ['Node.js', 'Socket.IO', 'MongoDB', 'RabbitMQ', 'PouchDB', 'Redis'],
-    image: '/projects/suryacon-ui.png',
+    image: '/projects/suryacon-ui.webp',
     accent: '#ff8a5c',
   },
   {
@@ -118,7 +119,7 @@ export const projects = [
     description:
       'A real-time pipeline for a live copy trading platform, where every market move has to reach every connected trader instantly. Multiplexed server-sent events fan updates out across concurrent sessions while keeping server load impressively light. Built for the moment a market spikes and thousands of screens need to agree on reality at the same time.',
     stack: ['Node.js', 'Server-Sent Events', 'React', 'Redis', 'TypeScript'],
-    image: '/projects/tradesync-ui.png',
+    image: '/projects/tradesync-ui.webp',
     accent: '#4de3b8',
   },
   {
@@ -129,7 +130,7 @@ export const projects = [
     description:
       'A drag-and-drop email studio built in React, with deeply nested component state, live reordering and a serialization layer that turns visual layouts into production-ready templates. The kind of interface where the engineering stays invisible precisely because the state management underneath is anything but simple.',
     stack: ['React', 'DnD Pangea', 'TypeScript', 'Node.js'],
-    image: '/projects/mailcraft-ui.png',
+    image: '/projects/mailcraft-ui.webp',
     accent: '#cf9bff',
   },
 ]
