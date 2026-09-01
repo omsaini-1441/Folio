@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useRef, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 import { motion } from 'motion/react'
 import { useLenis } from 'lenis/react'
 
@@ -11,61 +19,128 @@ export const useWipe = () => useContext(WipeContext)
 
 const EASE = [0.76, 0, 0.24, 1] as const
 
+const reducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const SWEEP = reducedMotion ? 0.01 : 0.75
+const HOLD_MS = reducedMotion ? 0 : 180
+
 /**
- * Full-page "paint" transition. wipeTo(target) sweeps an accent panel
- * with curved edges over the viewport, performs the scroll jump while
- * the screen is covered, then sweeps the panel away.
+ * Liquid edge shapes. Every path shares an identical command structure
+ * (one cubic curve, same number of values), which is what lets Motion
+ * interpolate between them and morph the surface instead of snapping.
+ * The keyframe order reads as: flung up, slosh back, settle.
+ */
+const TOP_SURGE = [
+  'M0,100 C25,-60 75,-60 100,100 Z',
+  'M0,100 C25,-25 75,40 100,100 Z',
+  'M0,100 C25,55 75,20 100,100 Z',
+  'M0,100 C25,72 75,72 100,100 Z',
+]
+const TOP_REST = 'M0,100 C25,72 75,72 100,100 Z'
+
+const BOTTOM_SURGE = [
+  'M0,0 C25,160 75,160 100,0 Z',
+  'M0,0 C25,125 75,60 100,0 Z',
+  'M0,0 C25,45 75,80 100,0 Z',
+  'M0,0 C25,28 75,28 100,0 Z',
+]
+const BOTTOM_REST = 'M0,0 C25,28 75,28 100,0 Z'
+
+type Phase = 'idle' | 'enter' | 'exit'
+
+function LiquidEdge({
+  side,
+  animate,
+}: {
+  side: 'top' | 'bottom'
+  animate: string | string[]
+}) {
+  const isTop = side === 'top'
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      className="absolute left-[-5%] h-[16vh] w-[110%]"
+      style={isTop ? { top: '-15.8vh' } : { bottom: '-15.8vh' }}
+      aria-hidden
+    >
+      <motion.path
+        fill="var(--color-accent)"
+        initial={false}
+        d={isTop ? TOP_REST : BOTTOM_REST}
+        animate={{ d: animate }}
+        transition={{ duration: SWEEP, ease: 'easeOut' }}
+      />
+    </svg>
+  )
+}
+
+/**
+ * Full-page liquid transition. wipeTo(target) floods an accent panel over
+ * the viewport, performs the scroll jump while the screen is covered, then
+ * drains it away. Phases are timer-driven so navigation still completes if
+ * the animation is skipped (e.g. reduced-motion users).
  */
 export default function WipeProvider({ children }: { children: ReactNode }) {
   const lenis = useLenis()
-  const [phase, setPhase] = useState<'idle' | 'enter' | 'exit'>('idle')
+  const [phase, setPhase] = useState<Phase>('idle')
   const [label, setLabel] = useState('')
+  const phaseRef = useRef<Phase>('idle')
   const target = useRef<string | number>('#contact')
+
+  const setPhaseSafe = (next: Phase) => {
+    phaseRef.current = next
+    setPhase(next)
+  }
 
   const wipeTo = useCallback<WipeFn>(
     (t, l = '') => {
-      setPhase((current) => {
-        if (current !== 'idle') return current
-        target.current = t
-        setLabel(l)
-        lenis?.stop()
-        return 'enter'
-      })
+      if (phaseRef.current !== 'idle') return
+      target.current = t
+      setLabel(l)
+      lenis?.stop()
+      setPhaseSafe('enter')
     },
     [lenis],
   )
+
+  useEffect(() => {
+    if (phase === 'idle') return
+
+    if (phase === 'enter') {
+      const id = window.setTimeout(() => {
+        lenis?.scrollTo(target.current, { immediate: true, force: true })
+        setPhaseSafe('exit')
+      }, SWEEP * 1000 + HOLD_MS)
+      return () => window.clearTimeout(id)
+    }
+
+    const id = window.setTimeout(() => {
+      lenis?.start()
+      setPhaseSafe('idle')
+    }, SWEEP * 1000)
+    return () => window.clearTimeout(id)
+  }, [phase, lenis])
 
   return (
     <WipeContext.Provider value={wipeTo}>
       {children}
 
-      <div className="pointer-events-none fixed inset-0 z-[150]" aria-hidden>
+      <div
+        className={`fixed inset-0 z-[150] ${phase === 'idle' ? 'pointer-events-none' : 'pointer-events-auto'}`}
+        aria-hidden
+      >
         <motion.div
           className="absolute inset-0 flex items-center justify-center bg-accent"
           initial={false}
           animate={
-            phase === 'enter' ? { y: '0%' } : phase === 'exit' ? { y: '-115%' } : { y: '115%' }
+            phase === 'enter' ? { y: '0%' } : phase === 'exit' ? { y: '-125%' } : { y: '125%' }
           }
-          transition={phase === 'idle' ? { duration: 0 } : { duration: 0.65, ease: EASE }}
-          onAnimationComplete={() => {
-            if (phase === 'enter') {
-              lenis?.scrollTo(target.current, { immediate: true, force: true })
-              window.setTimeout(() => setPhase('exit'), 200)
-            } else if (phase === 'exit') {
-              lenis?.start()
-              setPhase('idle')
-            }
-          }}
+          transition={phase === 'idle' ? { duration: 0 } : { duration: SWEEP, ease: EASE }}
         >
-          {/* curved caps give the panel its paint-blob leading edge */}
-          <div
-            className="absolute left-[-5%] top-[-9.5vh] h-[10vh] w-[110%] bg-accent"
-            style={{ borderRadius: '50% 50% 0 0 / 100% 100% 0 0' }}
-          />
-          <div
-            className="absolute bottom-[-9.5vh] left-[-5%] h-[10vh] w-[110%] bg-accent"
-            style={{ borderRadius: '0 0 50% 50% / 0 0 100% 100%' }}
-          />
+          <LiquidEdge side="top" animate={phase === 'enter' ? TOP_SURGE : TOP_REST} />
+          <LiquidEdge side="bottom" animate={phase === 'exit' ? BOTTOM_SURGE : BOTTOM_REST} />
 
           {label && (
             <motion.span

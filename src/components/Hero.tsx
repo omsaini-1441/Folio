@@ -59,21 +59,15 @@ export default function Hero({ ready }: { ready: boolean }) {
           <span className="font-mono text-xs uppercase tracking-widest text-muted">
             {profile.availability} · {profile.location}
           </span>
+          <span className="ml-auto font-mono text-xs text-accent">©2026</span>
         </motion.div>
 
-        <h1 className="mt-8 w-full min-w-0 text-[9.5vw] md:text-[9vw]">
+        {/* Sized so the widest line always fills the column minus its padding:
+            the headline is ~10.3em wide, and the extra headroom absorbs the
+            text stroke and any font-loading variance. */}
+        <h1 className="mt-8 w-full min-w-0 text-[calc((100vw-40px)/10.8)] md:text-[calc((100vw-80px)/10.8)]">
           <RevealLine text={profile.heroLines[0]} delay={0.35} ready={ready} />
-          <span className="flex items-baseline gap-[2vw]">
-            <RevealLine text={profile.heroLines[1]} delay={0.5} ready={ready} outlined />
-            <motion.span
-              className="hidden font-mono text-sm text-accent md:inline"
-              initial={{ opacity: 0 }}
-              animate={ready ? { opacity: 1 } : {}}
-              transition={{ delay: 1.4, duration: 0.8 }}
-            >
-              ©2026
-            </motion.span>
-          </span>
+          <RevealLine text={profile.heroLines[1]} delay={0.5} ready={ready} outlined />
         </h1>
 
         <div className="mt-10 flex flex-col justify-between gap-8 md:flex-row md:items-end">
