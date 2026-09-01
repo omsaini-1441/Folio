@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import Magnetic from './Magnetic'
+import { useWipe } from './PageWipe'
 import { profile, footerNote, contactFormAccessKey } from '../data/portfolio'
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -25,8 +26,15 @@ function LocalTime() {
 }
 
 function RotatingBadge() {
+  const wipeTo = useWipe()
   return (
-    <div className="relative hidden h-32 w-32 md:block">
+    <button
+      onClick={() => wipeTo('#contact-form', 'Say hi')}
+      data-hover
+      data-cursor-label="Let's go"
+      className="group pointer-events-auto relative hidden h-32 w-32 transition-transform duration-500 hover:scale-110 md:block"
+      aria-label="Jump to contact form"
+    >
       <motion.svg
         viewBox="0 0 100 100"
         className="h-full w-full"
@@ -36,12 +44,12 @@ function RotatingBadge() {
         <defs>
           <path id="badge-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
         </defs>
-        <text className="fill-muted font-mono text-[8px] uppercase tracking-[0.22em]">
+        <text className="fill-muted font-mono text-[8px] uppercase tracking-[0.22em] transition-colors duration-300 group-hover:fill-paper">
           <textPath href="#badge-circle">Open to work · Let's talk · Open to work ·</textPath>
         </text>
       </motion.svg>
       <span className="absolute inset-0 flex items-center justify-center text-xl text-accent">↓</span>
-    </div>
+    </button>
   )
 }
 
@@ -321,7 +329,7 @@ export default function Contact() {
       </div>
 
       {/* Conversational contact form */}
-      <div className="mx-auto mt-24 w-full max-w-4xl border-t border-line pt-14 md:mt-32 md:pt-20">
+      <div id="contact-form" className="mx-auto mt-24 w-full max-w-4xl scroll-mt-24 border-t border-line pt-14 md:mt-32 md:pt-20">
         <motion.p
           className="mb-10 font-mono text-xs uppercase tracking-widest text-muted"
           initial={{ opacity: 0, y: 20 }}

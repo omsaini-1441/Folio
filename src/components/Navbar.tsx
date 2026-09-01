@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useLenis } from 'lenis/react'
 import Magnetic from './Magnetic'
+import { useWipe } from './PageWipe'
 import { profile } from '../data/portfolio'
 
 const links = [
@@ -15,12 +16,12 @@ const EASE = [0.76, 0, 0.24, 1] as const
 
 export default function Navbar({ ready }: { ready: boolean }) {
   const lenis = useLenis()
+  const wipeTo = useWipe()
   const [open, setOpen] = useState(false)
 
-  const go = (target: string | number) => {
+  const go = (target: string | number, label: string) => {
     setOpen(false)
-    lenis?.start()
-    lenis?.scrollTo(target, { offset: 0 })
+    wipeTo(target, label)
   }
 
   const toggleMenu = () => {
@@ -42,7 +43,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
         <nav className="flex items-center justify-between bg-gradient-to-b from-ink/80 to-transparent px-5 py-4 md:px-10 md:py-5">
           <Magnetic>
             <button
-              onClick={() => go(0)}
+              onClick={() => go(0, 'Home')}
               className="font-display text-lg font-bold tracking-tight text-paper"
               data-hover
             >
@@ -56,7 +57,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
               <li key={link.label}>
                 <Magnetic strength={0.25}>
                   <button
-                    onClick={() => go(link.target)}
+                    onClick={() => go(link.target, link.label)}
                     className="group relative px-1 py-1 font-mono text-xs uppercase tracking-widest text-paper"
                     data-hover
                   >
@@ -70,13 +71,13 @@ export default function Navbar({ ready }: { ready: boolean }) {
 
           <div className="flex items-center gap-3">
             <Magnetic className="hidden md:block">
-              <a
-                href={`mailto:${profile.email}`}
+              <button
+                onClick={() => go('#contact-form', "Let's talk")}
                 className="rounded-full border border-paper/30 px-4 py-2 font-mono text-xs uppercase tracking-widest text-paper transition-colors duration-300 hover:border-accent hover:text-accent"
                 data-hover
               >
                 Let's talk
-              </a>
+              </button>
             </Magnetic>
 
             {/* Mobile menu toggle */}
@@ -113,7 +114,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
               {links.map((link, i) => (
                 <li key={link.label} className="overflow-hidden">
                   <motion.button
-                    onClick={() => go(link.target)}
+                    onClick={() => go(link.target, link.label)}
                     className="font-display text-5xl font-extrabold uppercase tracking-tight text-paper"
                     initial={{ y: '110%' }}
                     animate={{ y: 0 }}

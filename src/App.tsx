@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ReactLenis } from 'lenis/react'
+import WipeProvider from './components/PageWipe'
 import Preloader from './components/Preloader'
 import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
@@ -16,6 +17,7 @@ export default function App() {
 
   return (
     <ReactLenis root options={{ lerp: 0.08, wheelMultiplier: 1.1 }}>
+      <WipeProvider>
       <div className="grain overflow-x-clip">
         <Preloader onDone={() => setReady(true)} />
         <Cursor />
@@ -30,6 +32,7 @@ export default function App() {
         </main>
         <Contact />
       </div>
+      </WipeProvider>
     </ReactLenis>
   )
 }
