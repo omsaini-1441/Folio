@@ -33,7 +33,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
     <AnimatePresence onExitComplete={onDone}>
       {!finished && (
         <motion.div
-          className="fixed inset-0 z-[300] flex flex-col justify-between bg-ink p-6 md:p-10"
+          className="fixed inset-0 z-300 flex flex-col justify-between bg-ink p-6 md:p-10"
           exit={{ y: '-100%' }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >

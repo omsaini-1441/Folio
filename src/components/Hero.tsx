@@ -42,7 +42,7 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section ref={ref} className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pb-8 pt-28 md:px-10">
       {/* ambient glow */}
       <div
-        className="pointer-events-none absolute -top-1/4 left-1/2 h-[80vmin] w-[80vmin] -translate-x-1/2 rounded-full opacity-20 blur-[120px]"
+        className="pointer-events-none absolute -top-1/4 left-1/2 h-80vmin w-80vmin -translate-x-1/2 rounded-full opacity-20 blur-120px"
         style={{ background: 'radial-gradient(circle, #ccf655 0%, transparent 70%)' }}
       />
 
@@ -106,7 +106,7 @@ export default function Hero({ ready }: { ready: boolean }) {
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             style={{ transformOrigin: 'top' }}
           />
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted">Scroll</span>
+          <span className="font-mono text-10px uppercase tracking-[0.3em] text-muted">Scroll</span>
         </motion.div>
       </motion.div>
     </section>

@@ -49,7 +49,7 @@ export default function Cursor() {
    */
   return (
     <motion.div
-      className={`pointer-events-none fixed left-0 top-0 z-[200] flex items-center justify-center rounded-full bg-accent ${
+      className={`pointer-events-none fixed left-0 top-0 z-200 flex items-center justify-center rounded-full bg-accent ${
         label ? '' : 'mix-blend-difference'
       }`}
       style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
@@ -60,7 +60,7 @@ export default function Cursor() {
       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
     >
       {label && (
-        <span className="font-mono text-[10px] uppercase tracking-widest text-ink">{label}</span>
+        <span className="font-mono text-10px uppercase tracking-widest text-ink">{label}</span>
       )}
     </motion.div>
   )

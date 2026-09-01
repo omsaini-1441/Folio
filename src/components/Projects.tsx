@@ -21,7 +21,7 @@ function ProjectCard({ project, flip }: { project: Project; flip: boolean }) {
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Visual */}
-      <div data-hover className="group relative block aspect-[4/3] overflow-hidden rounded-2xl">
+      <div data-hover className="group relative block aspect-4/3 overflow-hidden rounded-2xl">
         <motion.div
           className="absolute inset-[-10%] transition-transform duration-700 ease-out group-hover:scale-105"
           style={{ y: visualY }}
@@ -36,7 +36,7 @@ function ProjectCard({ project, flip }: { project: Project; flip: boolean }) {
             decoding="async"
           />
         </motion.div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/60 via-transparent to-transparent" />
 
         <span className="absolute left-5 top-5 font-mono text-xs uppercase tracking-widest text-paper/80">
           {project.category}

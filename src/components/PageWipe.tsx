@@ -61,7 +61,7 @@ function LiquidEdge({
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
-      className="absolute left-[-5%] h-[16vh] w-[110%]"
+      className="absolute left-[-5%] h-16vh w-110%"
       style={isTop ? { top: '-15.8vh' } : { bottom: '-15.8vh' }}
       aria-hidden
     >
@@ -128,7 +128,7 @@ export default function WipeProvider({ children }: { children: ReactNode }) {
       {children}
 
       <div
-        className={`fixed inset-0 z-[150] ${phase === 'idle' ? 'pointer-events-none' : 'pointer-events-auto'}`}
+        className={`fixed inset-0 z-150 ${phase === 'idle' ? 'pointer-events-none' : 'pointer-events-auto'}`}
         aria-hidden
       >
         <motion.div

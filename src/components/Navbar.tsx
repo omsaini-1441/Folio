@@ -40,7 +40,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
         animate={ready ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       >
-        <nav className="flex items-center justify-between bg-gradient-to-b from-ink/80 to-transparent px-5 py-4 md:px-10 md:py-5">
+        <nav className="flex items-center justify-between bg-linear-to-b from-ink/80 to-transparent px-5 py-4 md:px-10 md:py-5">
           <Magnetic>
             <button
               onClick={() => go(0, 'Home')}
@@ -83,7 +83,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
             {/* Mobile menu toggle */}
             <button
               onClick={toggleMenu}
-              className="relative z-[80] flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+              className="relative z-80 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
               aria-label="Menu"
               data-hover
             >
@@ -104,7 +104,7 @@ export default function Navbar({ ready }: { ready: boolean }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[70] flex flex-col justify-between bg-ink-2 px-6 pb-10 pt-28"
+            className="fixed inset-0 z-70 flex flex-col justify-between bg-ink-2 px-6 pb-10 pt-28"
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}

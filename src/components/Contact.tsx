@@ -44,7 +44,7 @@ function RotatingBadge() {
         <defs>
           <path id="badge-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
         </defs>
-        <text className="fill-muted font-mono text-[8px] uppercase tracking-[0.22em] transition-colors duration-300 group-hover:fill-paper">
+        <text className="fill-muted font-mono text-8px uppercase tracking-[0.22em] transition-colors duration-300 group-hover:fill-paper">
           <textPath href="#badge-circle">Open to work · Let's talk · Open to work ·</textPath>
         </text>
       </motion.svg>
@@ -264,7 +264,7 @@ function ContactForm() {
                 Something broke. Email me directly instead?
               </span>
             ) : (
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted/60">
+              <span className="font-mono text-10px uppercase tracking-[0.25em] text-muted/60">
                 Straight to my inbox · no spam folder purgatory
               </span>
             )}
@@ -280,7 +280,7 @@ export default function Contact() {
     <footer id="contact" className="relative overflow-hidden px-6 pb-10 pt-28 md:px-10 md:pt-40">
       {/* ambient glow */}
       <div
-        className="pointer-events-none absolute bottom-[-30%] left-1/2 h-[70vmin] w-[90vmin] -translate-x-1/2 rounded-full opacity-15 blur-[120px]"
+        className="pointer-events-none absolute bottom-[-30%] left-1/2 h-70vmin w-90vmin -translate-x-1/2 rounded-full opacity-15 blur-120px"
         style={{ background: 'radial-gradient(circle, #ccf655 0%, transparent 70%)' }}
       />
 
@@ -388,7 +388,7 @@ export default function Contact() {
           ))}
         </ul>
 
-        <span className="max-w-xs font-mono text-[10px] uppercase leading-relaxed tracking-widest text-muted/60">
+        <span className="max-w-xs font-mono text-10px uppercase leading-relaxed tracking-widest text-muted/60">
           {footerNote}
         </span>
       </div>
