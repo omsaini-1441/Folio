@@ -1,23 +1,46 @@
-import { useState } from 'react'
+import { lazy, Suspense, useEffect, useLayoutEffect, useState, type ComponentType } from 'react'
 import { MotionConfig } from 'motion/react'
 import { ReactLenis } from 'lenis/react'
 import WipeProvider from './components/PageWipe'
 import Preloader from './components/Preloader'
-import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Contact from './components/Contact'
+
+const About = lazy(() => import('./components/About'))
+const Skills = lazy(() => import('./components/Skills'))
+const Projects = lazy(() => import('./components/Projects'))
+const Experience = lazy(() => import('./components/Experience'))
+const Contact = lazy(() => import('./components/Contact'))
 
 const prefersReducedMotion =
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+function LazyCursor() {
+  const [Cursor, setCursor] = useState<ComponentType | null>(null)
+
+  useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!fine || reduced) return
+
+    const load = () => {
+      void import('./components/Cursor').then((mod) => setCursor(() => mod.default))
+    }
+
+    const t = window.setTimeout(load, 250)
+    return () => window.clearTimeout(t)
+  }, [])
+
+  return Cursor ? <Cursor /> : null
+}
+
 export default function App() {
   const [ready, setReady] = useState(false)
+
+  useLayoutEffect(() => {
+    document.getElementById('boot')?.remove()
+  }, [])
 
   return (
     <MotionConfig reducedMotion="user">
@@ -31,18 +54,22 @@ export default function App() {
       >
         <WipeProvider>
           <div className="grain overflow-x-clip">
-            <Preloader onDone={() => setReady(true)} />
-            <Cursor />
+            {!ready && <Preloader onDone={() => setReady(true)} />}
+            <LazyCursor />
             <Navbar ready={ready} />
             <main>
               <Hero ready={ready} />
               <Marquee />
-              <About />
-              <Skills />
-              <Projects />
-              <Experience />
+              <Suspense fallback={null}>
+                <About />
+                <Skills />
+                <Projects />
+                <Experience />
+              </Suspense>
             </main>
-            <Contact />
+            <Suspense fallback={null}>
+              <Contact />
+            </Suspense>
           </div>
         </WipeProvider>
       </ReactLenis>

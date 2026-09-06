@@ -280,7 +280,7 @@ export default function Contact() {
     <footer id="contact" className="relative overflow-hidden px-6 pb-10 pt-28 md:px-10 md:pt-40">
       {/* ambient glow */}
       <div
-        className="pointer-events-none absolute bottom-[-30%] left-1/2 h-[70vmin] w-[90vmin] -translate-x-1/2 rounded-full opacity-15 blur-[120px]"
+        className="pointer-events-none absolute bottom-[-30%] left-1/2 h-[70vmin] w-[90vmin] -translate-x-1/2 rounded-full opacity-15"
         style={{ background: 'radial-gradient(circle, #ccf655 0%, transparent 70%)' }}
       />
 

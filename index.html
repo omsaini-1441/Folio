@@ -40,13 +40,104 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Self-hosted latin variable fonts. Declared here (not in the Vite CSS)
+      so the preloaded Syne file is used on first paint, before JS arrives.
+    -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/syne-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <style>
+      @font-face {
+        font-family: Syne;
+        src: url("/fonts/syne-latin-wght-normal.woff2") format("woff2");
+        font-weight: 400 800;
+        font-style: normal;
+        font-display: swap;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Instrument Sans";
+        src: url("/fonts/instrument-sans-latin-wght-normal.woff2") format("woff2");
+        font-weight: 400 700;
+        font-style: normal;
+        font-display: swap;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+        font-weight: 100 800;
+        font-style: normal;
+        font-display: swap;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      html {
+        color-scheme: dark;
+      }
+      html,
+      body {
+        margin: 0;
+        background: #0b0b0c;
+        color: #f1efe6;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 1.5rem;
+        background: #0b0b0c;
+      }
+      @media (min-width: 768px) {
+        #boot {
+          padding: 2.5rem;
+        }
+      }
+      #boot .meta {
+        display: flex;
+        justify-content: space-between;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #8f8d84;
+      }
+      #boot .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+      }
+      #boot .hint {
+        max-width: 20rem;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.75rem;
+        line-height: 1.65;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #8f8d84;
+      }
+      #boot .count {
+        font-family: Syne, Impact, sans-serif;
+        font-weight: 800;
+        font-size: 18vw;
+        line-height: 1;
+        color: #f1efe6;
+      }
+      @media (min-width: 768px) {
+        #boot .count {
+          font-size: 10rem;
+        }
+      }
+    </style>
 
     <script type="application/ld+json">
       {
@@ -79,6 +170,17 @@
     </script>
   </head>
   <body>
+    <!-- Paints immediately so first contentful paint is not gated on JS. -->
+    <div id="boot" aria-hidden="true">
+      <div class="meta">
+        <span>Om Saini</span>
+        <span>Portfolio © 2026</span>
+      </div>
+      <div class="row">
+        <p class="hint">Loading the good stuff: fonts, easing curves &amp; questionable confidence</p>
+        <span class="count">0</span>
+      </div>
+    </div>
     <div id="root"></div>
     <noscript>
       <div style="padding: 2rem; color: #f1efe6; font-family: sans-serif">

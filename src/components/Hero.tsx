@@ -42,7 +42,7 @@ export default function Hero({ ready }: { ready: boolean }) {
     <section ref={ref} className="relative flex min-h-svh flex-col justify-between overflow-hidden px-6 pb-8 pt-28 md:px-10">
       {/* ambient glow */}
       <div
-        className="pointer-events-none absolute -top-1/4 left-1/2 h-[80vmin] w-[80vmin] -translate-x-1/2 rounded-full opacity-20 blur-[120px]"
+        className="pointer-events-none absolute -top-1/4 left-1/2 h-[80vmin] w-[80vmin] -translate-x-1/2 rounded-full opacity-20"
         style={{ background: 'radial-gradient(circle, #ccf655 0%, transparent 70%)' }}
       />
 

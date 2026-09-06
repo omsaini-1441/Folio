@@ -32,6 +32,7 @@ function ProjectCard({ project, flip }: { project: Project; flip: boolean }) {
             className="h-full w-full object-cover"
             width={1400}
             height={1050}
+            sizes="(min-width: 768px) 50vw, 100vw"
             loading="lazy"
             decoding="async"
           />
