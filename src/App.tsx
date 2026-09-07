@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useLayoutEffect, useState, type ComponentTyp
 import { MotionConfig } from 'motion/react'
 import { ReactLenis } from 'lenis/react'
 import WipeProvider from './components/PageWipe'
+import ResumeProvider from './components/ResumeCinematic'
 import Preloader from './components/Preloader'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -53,7 +54,8 @@ export default function App() {
         }}
       >
         <WipeProvider>
-          <div className="grain overflow-x-clip">
+          <ResumeProvider>
+            <div className="grain overflow-x-clip">
             {!ready && <Preloader onDone={() => setReady(true)} />}
             <LazyCursor />
             <Navbar ready={ready} />
@@ -70,7 +72,8 @@ export default function App() {
             <Suspense fallback={null}>
               <Contact />
             </Suspense>
-          </div>
+            </div>
+          </ResumeProvider>
         </WipeProvider>
       </ReactLenis>
     </MotionConfig>

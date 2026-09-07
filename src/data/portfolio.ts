@@ -14,6 +14,11 @@ export const profile = {
   email: 'omsaini.tech@gmail.com',
   phone: '+91 77194 87204',
   availability: 'Open to opportunities',
+  resumeFile: '/om-saini-resume.pdf',
+  resumeName: 'Om-Saini-Resume.pdf',
+  resumeUrl: 'https://flowcv.com/resume/fwtpdmusr9',
+  resumeSummary:
+    'Full-stack developer with 2+ years shipping production event-driven systems, RabbitMQ pipelines, real-time sync engines and multi-tenant infrastructure. Looking for a team that takes reliability as seriously as the interface.',
   heroLines: ['FULL-STACK', 'DEVELOPER'],
   // Wrap any phrase in *asterisks* to paint it in the accent colour.
   heroBlurb:
@@ -133,6 +138,50 @@ export const projects = [
     stack: ['React', 'DnD Pangea', 'TypeScript', 'Node.js'],
     image: '/projects/mailcraft-ui.webp',
     accent: '#cf9bff',
+  },
+  {
+    index: '05',
+    title: 'BitVault',
+    category: 'Security · Zero-Knowledge Secrets Vault',
+    year: '2026',
+    description:
+      'A vault for the keys you should never paste into Slack. *Client-side encryption*, scoped sharing and an interface that treats an API token with the same ceremony as a bank box. Small teams get a place to keep credentials *without ever sharing the secret itself*.',
+    stack: ['React', 'Node.js', 'WebCrypto', 'PostgreSQL', 'Redis', 'TypeScript'],
+    image: '/projects/bitvault-ui.webp',
+    accent: '#e4c36a',
+  },
+  {
+    index: '06',
+    title: 'Bonfire',
+    category: 'Extension · On-Device Dark-Pattern Scanner',
+    year: '2026',
+    description:
+      'A Chrome extension that reads the *current tab* for hidden text, fake urgency and checkout tricks, then scores the page from *unsafe 0* to *clear 100*. Everything runs on your machine. No account, no upload, just a second opinion before you hit Buy Now.',
+    stack: ['Chrome Extension', 'JavaScript', 'Heuristics', 'Privacy'],
+    image: '/projects/bonfire-ui.webp',
+    accent: '#ff6b35',
+  },
+  {
+    index: '07',
+    title: 'PeerPod',
+    category: 'Realtime · Focus Gym for Builders',
+    year: '2026',
+    description:
+      'A live *focus gym* for people who work better when someone else is in the room. Join a pod, start a session, and watch scores land on a *Redis leaderboard* while Socket.IO keeps presence, tasks and the timer in lockstep. NestJS and Postgres hold the source of truth; the client just makes the pressure feel stylish.',
+    stack: ['NestJS', 'Next.js', 'PostgreSQL', 'Redis', 'Socket.IO', 'TypeORM'],
+    image: '/projects/peerpod-ui.webp',
+    accent: '#2ee6d6',
+  },
+  {
+    index: '08',
+    title: 'Savante',
+    category: 'AI · Brand & Influencer Matching',
+    year: '2024',
+    description:
+      'An AI matching room where brands meet creators who actually *share their audience*. Compatibility scores, niche filters and a deck of influencer cards that make the pairing feel inevitable. Motion-heavy, fully responsive, and *opinionated about first impressions*.',
+    stack: ['React', 'Tailwind CSS', 'Framer Motion', 'JavaScript'],
+    image: '/projects/savante-ui.webp',
+    accent: '#ff5ca8',
   },
 ]
 

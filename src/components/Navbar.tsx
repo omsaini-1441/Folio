@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useLenis } from 'lenis/react'
 import Magnetic from './Magnetic'
 import { useWipe } from './PageWipe'
+import { useResume } from './ResumeCinematic'
 import { profile } from '../data/portfolio'
 
 const links = [
@@ -17,11 +18,18 @@ const EASE = [0.76, 0, 0.24, 1] as const
 export default function Navbar({ ready }: { ready: boolean }) {
   const lenis = useLenis()
   const wipeTo = useWipe()
+  const { openResume, active } = useResume()
   const [open, setOpen] = useState(false)
 
   const go = (target: string | number, label: string) => {
+    if (active) return
     setOpen(false)
     wipeTo(target, label)
+  }
+
+  const onResume = () => {
+    setOpen(false)
+    openResume()
   }
 
   const toggleMenu = () => {
@@ -69,7 +77,19 @@ export default function Navbar({ ready }: { ready: boolean }) {
             ))}
           </ul>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
+            <Magnetic className="hidden md:block">
+              <button
+                type="button"
+                onClick={onResume}
+                className="rounded-full border border-paper/30 px-4 py-2 font-mono text-xs uppercase tracking-widest text-paper transition-colors duration-300 hover:border-accent hover:text-accent"
+                data-hover
+                data-cursor-label="Watch"
+              >
+                Resume
+              </button>
+            </Magnetic>
+
             <Magnetic className="hidden md:block">
               <button
                 onClick={() => go('#contact-form', "Let's talk")}
@@ -128,6 +148,20 @@ export default function Navbar({ ready }: { ready: boolean }) {
                   </motion.button>
                 </li>
               ))}
+              <li className="overflow-hidden">
+                <motion.button
+                  type="button"
+                  onClick={onResume}
+                  className="font-display text-5xl font-extrabold uppercase tracking-tight text-paper"
+                  initial={{ y: '110%' }}
+                  animate={{ y: 0 }}
+                  exit={{ y: '110%', transition: { duration: 0.3 } }}
+                  transition={{ duration: 0.7, delay: 0.15 + links.length * 0.07, ease: EASE }}
+                >
+                  <span className="mr-3 font-mono text-sm text-accent">05</span>
+                  Resume
+                </motion.button>
+              </li>
             </ul>
 
             <motion.div
