@@ -92,10 +92,6 @@ body {
   animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
-.work-thread {
-  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-accent) 40%, transparent));
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-pulse-dot {
