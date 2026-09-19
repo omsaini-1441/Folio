@@ -39,7 +39,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
   const [display, setDisplay] = useState(0)
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView || value === 0) return
     const controls = animate(0, value, {
       duration: 1.6,
       ease: [0.22, 1, 0.36, 1],
@@ -48,10 +48,102 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
     return () => controls.stop()
   }, [inView, value])
 
+  if (value === 0) return <ZeroCounter />
+
   return (
     <span ref={ref} className="font-display text-5xl font-extrabold text-paper md:text-7xl">
       {display}
       <span className="text-accent">{suffix}</span>
+    </span>
+  )
+}
+
+/** Slowly ticks 0 → 1 → 2 → 3, then glitches 3 → 0 mid-burst, holds, loops. */
+function ZeroCounter() {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-15%' })
+  const [display, setDisplay] = useState(0)
+  const [glitching, setGlitching] = useState(false)
+
+  useEffect(() => {
+    if (!inView) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    let cancelled = false
+    const timers: number[] = []
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => {
+        timers.push(window.setTimeout(resolve, ms))
+      })
+
+    const glitchBurst = async () => {
+      setGlitching(true)
+      await wait(520)
+      if (cancelled) return
+      setGlitching(false)
+    }
+
+    const cycle = async () => {
+      while (!cancelled) {
+        // Brief glitch as the climb starts
+        await glitchBurst()
+        if (cancelled) return
+
+        setDisplay(0)
+        await wait(400)
+        if (cancelled) return
+
+        setDisplay(1)
+        await wait(800)
+        if (cancelled) return
+
+        setDisplay(2)
+        await wait(800)
+        if (cancelled) return
+
+        setDisplay(3)
+        await wait(700)
+        if (cancelled) return
+
+        // Glitch while still on 3 — snap to 0 mid-burst so the warp carries the change
+        setGlitching(true)
+        await wait(180)
+        if (cancelled) return
+        setDisplay(0)
+        await wait(340)
+        if (cancelled) return
+        setGlitching(false)
+
+        // Hold on zero before the next climb
+        await wait(3200)
+      }
+    }
+
+    void cycle()
+    return () => {
+      cancelled = true
+      timers.forEach(clearTimeout)
+    }
+  }, [inView])
+
+  return (
+    <span ref={ref} className="relative inline-flex items-start" aria-label="0">
+      <span
+        className={`relative font-display text-5xl font-extrabold text-paper md:text-7xl ${
+          glitching ? 'stat-glitch text-accent' : ''
+        }`}
+        data-text={display}
+      >
+        {display}
+      </span>
+      {display > 0 && !glitching && (
+        <span
+          aria-hidden
+          className="mt-[0.15em] ml-0.5 text-[0.55em] leading-none text-red-500 md:text-[0.5em]"
+        >
+          ▲
+        </span>
+      )}
     </span>
   )
 }

@@ -89,7 +89,7 @@ export default function Hero({ ready }: { ready: boolean }) {
           >
             <span className="font-mono text-xs uppercase tracking-widest text-muted">Currently wielding</span>
             <span className="font-display text-lg font-bold text-paper md:text-xl">
-              Node.js · NestJS · React · MongoDB
+              {profile.heroWielding.join(' · ')}
             </span>
           </motion.div>
         </div>

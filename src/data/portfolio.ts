@@ -22,9 +22,11 @@ export const profile = {
   heroLines: ['FULL-STACK', 'DEVELOPER'],
   // Wrap any phrase in *asterisks* to paint it in the accent colour.
   heroBlurb:
-    'I ship production *event-driven systems*: message pipelines, real-time sync engines and multi-tenant infrastructure, wrapped in interfaces that feel effortless.',
+    'Most of my work never makes the screenshot. Pipelines that hold, sync that recovers, deploy flows that feel *expensive*, then a UI that looks like it was easy.',
+  // Short "Currently wielding" strip in the hero — keep it to ~4 sharp signals.
+  heroWielding: ['TypeScript', 'NestJS', 'PostgreSQL', 'Redis'],
   aboutIntro:
-    "I'm a full-stack developer who lives on the backend and shows off on the frontend. I've architected the backbone of a high-availability ERP platform serving hundreds of APIs, built *real-time sync engines* that shrug off dropped connections, and designed message pipelines where losing an event is simply not an option. These days I'm building *OrchOrb*, a multi-tenant Docker control plane that gives small teams big-league deploy workflows *without the Kubernetes tax*. Give me a hard infrastructure problem and an interface worth obsessing over, and I'm home.",
+    "I'm a software engineer with close to *2 years* of experience building everything from *eye-candy* features to robust *backend systems*. I've spent that time shipping work that doesn't get to *fail quietly* and interfaces that never apologize for being sharp. I build the *boring parts* so well the flashy parts get to stay flashy: *event-driven* backends, real-time product surfaces, and deploy craft that holds under *pressure*. Reliability first. Presence on the surface. I care about both and I refuse to pick only one. Give me a hard infrastructure problem and an interface worth obsessing over. That's the only brief I need.",
   socials: [
     { label: 'GitHub', url: 'https://github.com/omsaini-1441' },
     { label: 'LinkedIn', url: 'https://linkedin.com/in/om-saini' },
@@ -43,22 +45,24 @@ export const contactFormAccessKey = import.meta.env.VITE_WEB3FORMS_KEY ?? ''
 
 export const stats = [
   { value: 2, suffix: '+', label: 'Years shipping production systems' },
-  { value: 330, suffix: '+', label: 'Production APIs designed & shipped' },
-  { value: 15, suffix: '+', label: 'Platforms, products & modules delivered' },
+  { value: 20, suffix: '+', label: 'Platforms, products & modules delivered' },
   { value: 45, suffix: '%', label: 'Faster load times on my last launch' },
+  { value: 0, suffix: '', label: "Silent failures I'll ship with" },
 ]
 
 export const marqueeItems = [
-  'Node.js',
+  'TypeScript',
   'NestJS',
-  'React',
-  'MongoDB',
+  'Next.js',
+  'PostgreSQL',
+  'Prisma',
+  'Redis',
   'RabbitMQ',
   'Docker',
-  'PostgreSQL',
-  'TypeScript',
+  'Traefik',
   'Socket.IO',
-  'Redis',
+  'React',
+  'MongoDB',
 ]
 
 export const skillGroups = [
@@ -66,31 +70,55 @@ export const skillGroups = [
     title: 'Backend',
     tagline: 'Event-driven & built to take a punch',
     skills: [
+      'TypeScript',
+      'NestJS',
       'Node.js',
       'Express.js',
-      'NestJS',
-      'TypeScript',
       'REST APIs',
       'WebSockets',
       'Socket.IO',
       'Server-Sent Events',
       'RabbitMQ',
+      'JWT',
     ],
   },
   {
     title: 'Database',
     tagline: 'Data modeled with intent',
-    skills: ['MongoDB', 'Mongoose', 'Redis', 'PostgreSQL', 'TypeORM', 'Change Streams'],
+    skills: [
+      'PostgreSQL',
+      'Prisma',
+      'TypeORM',
+      'MongoDB',
+      'Redis',
+      'SQLite',
+      'PouchDB',
+      'Change Streams',
+    ],
   },
   {
     title: 'Frontend',
     tagline: 'Interfaces that feel alive',
-    skills: ['Next.js', 'React.js', 'JavaScript', 'Framer Motion', 'shadcn/ui', 'Tailwind CSS'],
+    skills: [
+      'Next.js',
+      'React',
+      'React Native',
+      'Tailwind CSS',
+      'Framer Motion',
+      'TipTap',
+      'NextAuth',
+      'shadcn/ui',
+    ],
   },
   {
     title: 'Infra & DevOps',
     tagline: 'Shipping is a feature',
-    skills: ['Docker', 'dockerode', 'Traefik', 'PM2', 'Nginx', 'CI / CD', 'GHCR'],
+    skills: ['Docker', 'dockerode', 'Traefik', 'Cloudinary', 'Nginx', 'PM2', 'CI / CD', 'GHCR'],
+  },
+  {
+    title: 'Platform',
+    tagline: 'Wherever the problem lives',
+    skills: ['C#', '.NET', 'WPF', 'Chrome Extensions', 'WebCrypto', 'Gemini'],
   },
 ]
 

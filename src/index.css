@@ -92,9 +92,95 @@ body {
   animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
+/* Chromatic / slice glitch for the "0 silent failures" counter */
+@keyframes stat-glitch-jitter {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: none;
+  }
+  15% {
+    transform: translate(-4px, -10px) skewX(-8deg);
+    filter: hue-rotate(50deg) contrast(1.4);
+  }
+  30% {
+    transform: translate(5px, 12px) skewX(10deg);
+  }
+  45% {
+    transform: translate(-6px, -8px) skewX(6deg);
+    filter: hue-rotate(-40deg);
+  }
+  60% {
+    transform: translate(4px, 14px) skewX(-12deg);
+  }
+  75% {
+    transform: translate(-3px, -11px) skewX(4deg);
+  }
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+    filter: none;
+  }
+}
+
+@keyframes stat-glitch-slice {
+  0%,
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  20% {
+    clip-path: inset(0 0 70% 0);
+    transform: translate(6px, -14px);
+  }
+  40% {
+    clip-path: inset(35% 0 35% 0);
+    transform: translate(-8px, 10px);
+  }
+  60% {
+    clip-path: inset(65% 0 0 0);
+    transform: translate(7px, 16px);
+  }
+  80% {
+    clip-path: inset(20% 0 45% 0);
+    transform: translate(-5px, -12px);
+  }
+}
+
+.stat-glitch {
+  animation: stat-glitch-jitter 0.5s steps(3, end);
+}
+
+.stat-glitch::before,
+.stat-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: stat-glitch-slice 0.5s steps(3, end);
+}
+
+.stat-glitch::before {
+  left: 3px;
+  top: -2px;
+  color: #7c8cff;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.stat-glitch::after {
+  left: -3px;
+  top: 2px;
+  color: #ff5ca8;
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  animation-delay: 0.06s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
-  .animate-pulse-dot {
+  .animate-pulse-dot,
+  .stat-glitch,
+  .stat-glitch::before,
+  .stat-glitch::after {
     animation: none;
   }
 
