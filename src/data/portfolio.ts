@@ -264,4 +264,36 @@ export const education = {
   detail: 'CGPA 9.81 / 10',
 }
 
+export const highlights = [
+  {
+    platform: 'LeetCode',
+    value: '1559',
+    label: 'Contest rating',
+    detail: 'Top 28.29%',
+    logo: '/brands/leetcode.svg',
+  },
+  {
+    platform: 'CodeChef',
+    value: '1623',
+    label: '3-star coder',
+    detail: '★★★',
+    logo: '/brands/codechef.svg',
+  },
+  {
+    platform: 'CodeStudio',
+    value: '11,180',
+    label: 'Expert rank',
+    detail: 'Expert',
+    logo: '/brands/codestudio.svg',
+  },
+]
+
+export const accolade = {
+  title: 'Innovest Hackathon',
+  badge: 'Semi-finalist',
+  prize: '₹10,000',
+  description:
+    'Built *Leazify*, a peer-to-peer item lending platform for college hostel students — and walked away with prizes worth ₹10,000.',
+}
+
 export const footerNote = 'Designed & engineered with far too much attention to easing curves.'
