@@ -94,7 +94,18 @@ export const skillGroups = [
   },
 ]
 
-export const projects = [
+export type Project = {
+  index: string
+  title: string
+  category: string
+  year: string
+  description: string
+  stack: string[]
+  image: string
+  accent: string
+}
+
+export const projects: Project[] = [
   {
     index: '01',
     title: 'OrchOrb',
@@ -119,36 +130,36 @@ export const projects = [
   },
   {
     index: '03',
-    title: 'TradeSync',
-    category: 'FinTech · Real-Time Copy Trading',
-    year: '2025',
+    title: 'Auto-Pilot',
+    category: 'Tooling · AI Job Outreach Studio',
+    year: '2026',
     description:
-      'A real-time pipeline for a live copy trading platform, where every market move has to reach every connected trader instantly. *Multiplexed server-sent events* fan updates out across concurrent sessions while keeping server load impressively light. Built for the moment a market spikes and thousands of screens need to *agree on reality* at the same time.',
-    stack: ['Node.js', 'Server-Sent Events', 'React', 'Redis', 'TypeScript'],
-    image: '/projects/tradesync-ui.webp',
-    accent: '#4de3b8',
+      'A mobile-first outreach studio for the solo job hunt. Paste a job post and let *Gemini extract* the company, role and location, dump contacts one line at a time, then generate *rich-text drafts* that paste into Gmail with formatting intact. Prisma and Postgres keep every application accounted for, from first signal to sent mail.',
+    stack: ['Next.js', 'Prisma', 'PostgreSQL', 'TipTap', 'Gemini'],
+    image: '/projects/autopilot-ui-v2.webp',
+    accent: '#6ee7ff',
   },
   {
     index: '04',
-    title: 'Mailcraft',
-    category: 'SaaS · Drag-and-Drop Email Studio',
-    year: '2025',
+    title: 'BitVault',
+    category: 'Mobile · Offline-First Security Vault',
+    year: '2026',
     description:
-      'A drag-and-drop email studio built in React, with deeply nested component state, live reordering and a *serialization layer* that turns visual layouts into production-ready templates. The kind of interface where *the engineering stays invisible* precisely because the state management underneath is anything but simple.',
-    stack: ['React', 'DnD Pangea', 'TypeScript', 'Node.js'],
-    image: '/projects/mailcraft-ui.webp',
-    accent: '#cf9bff',
+      'An *offline-first* mobile vault built on one belief: in the AI era of scrapers, leaks and training-data harvesting, the safest secret is the one that *never touches the internet*. Keys, credentials and identity documents live encrypted on the device — no cloud sync, no server to breach, nothing online to scrape. Biometric unlock and *client-side encryption* treat an API token with the same ceremony as a bank box.',
+    stack: ['React Native', 'SQLite', 'WebCrypto', 'TypeScript'],
+    image: '/projects/bitvault-ui-v2.webp',
+    accent: '#e4c36a',
   },
   {
     index: '05',
-    title: 'BitVault',
-    category: 'Security · Zero-Knowledge Secrets Vault',
+    title: 'PeerPod',
+    category: 'Realtime · Focus Gym for Builders',
     year: '2026',
     description:
-      'A vault for the keys you should never paste into Slack. *Client-side encryption*, scoped sharing and an interface that treats an API token with the same ceremony as a bank box. Small teams get a place to keep credentials *without ever sharing the secret itself*.',
-    stack: ['React', 'Node.js', 'WebCrypto', 'PostgreSQL', 'Redis', 'TypeScript'],
-    image: '/projects/bitvault-ui.webp',
-    accent: '#e4c36a',
+      'A live *focus gym* for people who work better when someone else is in the room. Join a pod, start a session, and watch scores land on a *Redis leaderboard* while Socket.IO keeps presence, tasks and the timer in lockstep. NestJS and Postgres hold the source of truth; the client just makes the pressure feel stylish.',
+    stack: ['NestJS', 'Next.js', 'PostgreSQL', 'Redis', 'Socket.IO', 'TypeORM'],
+    image: '/projects/peerpod-ui.webp',
+    accent: '#2ee6d6',
   },
   {
     index: '06',
@@ -163,17 +174,61 @@ export const projects = [
   },
   {
     index: '07',
-    title: 'PeerPod',
-    category: 'Realtime · Focus Gym for Builders',
-    year: '2026',
+    title: 'Forever You',
+    category: 'E-Commerce · Full-Stack Storefront',
+    year: '2025',
     description:
-      'A live *focus gym* for people who work better when someone else is in the room. Join a pod, start a session, and watch scores land on a *Redis leaderboard* while Socket.IO keeps presence, tasks and the timer in lockstep. NestJS and Postgres hold the source of truth; the client just makes the pressure feel stylish.',
-    stack: ['NestJS', 'Next.js', 'PostgreSQL', 'Redis', 'Socket.IO', 'TypeORM'],
-    image: '/projects/peerpod-ui.webp',
-    accent: '#2ee6d6',
+      'A fashion storefront where the backend is the point: JWT auth, cart sync, *server-recalculated order totals* so the client can never lie about a price, and an admin panel for products and order status. MongoDB holds the catalog, Cloudinary the imagery, and the seeded store opens with 52 products ready to browse.',
+    stack: ['React', 'Express', 'MongoDB', 'JWT', 'Cloudinary'],
+    image: '/projects/foreveryou-ui.webp',
+    accent: '#ffb3c7',
   },
   {
     index: '08',
+    title: 'TradeSync',
+    category: 'FinTech · Real-Time Copy Trading',
+    year: '2025',
+    description:
+      'A real-time pipeline for a live copy trading platform, where every market move has to reach every connected trader instantly. *Multiplexed server-sent events* fan updates out across concurrent sessions while keeping server load impressively light. Built for the moment a market spikes and thousands of screens need to *agree on reality* at the same time.',
+    stack: ['Node.js', 'Server-Sent Events', 'React', 'Redis', 'TypeScript'],
+    image: '/projects/tradesync-ui.webp',
+    accent: '#4de3b8',
+  },
+  {
+    index: '09',
+    title: 'Mailcraft',
+    category: 'SaaS · Drag-and-Drop Email Studio',
+    year: '2025',
+    description:
+      'A drag-and-drop email studio built in React, with deeply nested component state, live reordering and a *serialization layer* that turns visual layouts into production-ready templates. The kind of interface where *the engineering stays invisible* precisely because the state management underneath is anything but simple.',
+    stack: ['React', 'DnD Pangea', 'TypeScript', 'Node.js'],
+    image: '/projects/mailcraft-ui.webp',
+    accent: '#cf9bff',
+  },
+  {
+    index: '10',
+    title: 'FumeShelf',
+    category: 'Web App · Creator Perfume Shelves',
+    year: '2026',
+    description:
+      'Curated perfume shelves for fragrance creators: *scenario and season picks*, ratings and averaged metrics for every bottle on display. NextAuth guards the shelves, Prisma models the collection on Neon Postgres, and Cloudinary serves the bottle shots. Built for people who take their *sillage* seriously.',
+    stack: ['Next.js', 'Prisma', 'PostgreSQL', 'NextAuth', 'Cloudinary'],
+    image: '/projects/fumeshelf-ui-v2.webp',
+    accent: '#d98cff',
+  },
+  {
+    index: '11',
+    title: 'Walli',
+    category: 'Desktop · Per-Monitor Wallpapers',
+    year: '2026',
+    description:
+      'A native Windows utility that fixes an ancient annoyance: *one static wallpaper per monitor* without Windows forcing a slideshow on you. Drag, drop, apply, done — *zero background footprint*, no tray icon, no ads. Ships as both an installer and a portable exe, fully open source.',
+    stack: ['C#', '.NET', 'WPF', 'Windows API'],
+    image: '/projects/walli-ui-v2.webp',
+    accent: '#3db8d4',
+  },
+  {
+    index: '12',
     title: 'Savante',
     category: 'AI · Brand & Influencer Matching',
     year: '2024',
